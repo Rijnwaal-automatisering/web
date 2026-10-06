@@ -19,3 +19,7 @@ npm run build
 - `src/styles.css` – design tokens and layout
 
 All copy, prices, testimonials, the KvK number and the privacy policy are placeholder content. The contact form is a stub; point `onSubmit` at an n8n webhook.
+
+## Deployment
+
+Every push to `main` builds the site and publishes `dist/` to GitHub Pages via `.github/workflows/deploy.yml` (Node version from `.nvmrc`). In the repo settings, set **Pages → Source** to **GitHub Actions**. `dist/` is build output and is not committed.
