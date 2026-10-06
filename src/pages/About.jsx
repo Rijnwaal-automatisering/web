@@ -3,11 +3,12 @@ import AvatarScene from "../components/AvatarScene.jsx";
 import Icon from "../components/Icon.jsx";
 import { useState } from "react";
 import { BRAND, LINKEDIN_URL, ease, reveal, stagger, inView, SectionHead } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 // Zet de officiële logobestanden in public/logos/ (rabobank.svg, alliander.svg). Tot die er zijn, staat de naam er.
 const EMPLOYERS = [
-  { name: "Rabobank", logo: "/logos/rabobank.svg", sector: "Financiële sector" },
-  { name: "Alliander", logo: "/logos/alliander.svg", sector: "Energiesector" },
+  { name: "Rabobank", logo: url("/logos/rabobank.svg"), sector: "Financiële sector" },
+  { name: "Alliander", logo: url("/logos/alliander.svg"), sector: "Energiesector" },
 ];
 
 function EmployerLogo({ name, logo }) {
@@ -33,7 +34,7 @@ function Intro() {
           animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ duration: 0.9, ease, delay: 0.1 }}
         >
-          {/* Vervang AvatarScene door <img src="/niels.jpg" alt="..."> zodra de foto er is. */}
+          {/* Vervang AvatarScene door <img src={url("/niels.jpg")} alt="..."> zodra de foto er is. */}
           <AvatarScene />
           <figcaption>Niels ten H</figcaption>
         </motion.figure>
@@ -95,7 +96,7 @@ function Cta() {
           <h2>Zullen we een keer bellen?</h2>
           <p className="sub">In 30 minuten kijken we samen welk werk jij als eerste kunt automatiseren. Gratis en zonder verplichtingen.</p>
         </div>
-        <a href="/contact/" className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
+        <a href={url("/contact/")} className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

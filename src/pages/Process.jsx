@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import Icon from "../components/Icon.jsx";
 import { ease, reveal, stagger, inView } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 const STEPS = [
   {
@@ -134,7 +135,7 @@ function Cta() {
           <h2>Zullen we kennismaken?</h2>
           <p className="sub">Een gratis gesprek van 30 minuten. Daarna weet je of we een match zijn en wat je kunt verwachten.</p>
         </div>
-        <a href="/contact/" className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
+        <a href={url("/contact/")} className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

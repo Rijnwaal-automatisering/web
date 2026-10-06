@@ -22,4 +22,4 @@ All copy, prices, testimonials, the KvK number and the privacy policy are placeh
 
 ## Deployment
 
-Every push to `main` builds the site and publishes `dist/` to GitHub Pages via `.github/workflows/deploy.yml` (Node version from `.nvmrc`). In the repo settings, set **Pages → Source** to **GitHub Actions**. `dist/` is build output and is not committed.
+Every push to `main` builds the site and publishes `dist/` to GitHub Pages via `.github/workflows/deploy.yml` (Node version from `.nvmrc`). In the repo settings, set **Pages → Source** to **GitHub Actions**. `dist/` is build output and is not committed. The workflow builds with the Pages base path (`/web/` on `rijnwaal-automatisering.github.io/web/`, `/` on a custom domain), so internal links and image paths go through `url()` from `src/router.jsx`.

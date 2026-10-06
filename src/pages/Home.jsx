@@ -7,6 +7,7 @@ import {
 } from "motion/react";
 import Icon from "../components/Icon.jsx";
 import { BRAND, ease, reveal, stagger, inView, SectionHead } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 const GUARDS = [
   { icon: "key", title: "Toegangsbeheer", body: "Alleen de juiste mensen en systemen komen bij jouw data, met minimale rechten." },
@@ -145,10 +146,10 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 1.05 }}
         >
-          <a href="/contact/" className="btn">
+          <a href={url("/contact/")} className="btn">
             Gratis kennismaking <Icon name="arrow" size={18} />
           </a>
-          <a href="/prijzen/" className="btn btn--ghost">Bekijk de prijzen</a>
+          <a href={url("/prijzen/")} className="btn btn--ghost">Bekijk de prijzen</a>
         </motion.div>
         <motion.ul
           className="hero-meta"
@@ -234,7 +235,7 @@ function Waalsprong() {
       <div className="story">
         <motion.figure className="story-visual" initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={inView} transition={{ duration: 0.8, ease }}>
-          {/* Vervang <RiverSplit /> door <img src="/waalsprong.jpg" alt="..."> zodra de foto er is. */}
+          {/* Vervang <RiverSplit /> door <img src={url("/waalsprong.jpg")} alt="..."> zodra de foto er is. */}
           <RiverSplit />
           <figcaption>De Waal en de Spiegelwaal bij Nijmegen · foto volgt</figcaption>
         </motion.figure>
@@ -427,7 +428,7 @@ function AboutTeaser() {
           <h2>Je praat direct met degene die het bouwt.</h2>
           <p className="sub">Ruim tien jaar ontwikkelervaring, onder meer bij Rabobank en Alliander. Nu voor kleine bedrijven.</p>
         </div>
-        <a href="/over-mij/" className="btn btn--ghost">Meer over mij <Icon name="arrow" size={18} /></a>
+        <a href={url("/over-mij/")} className="btn btn--ghost">Meer over mij <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

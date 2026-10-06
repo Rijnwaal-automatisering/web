@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Icon from "../components/Icon.jsx";
 import { ease, reveal, stagger, inView, SectionHead } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 const TAILORED = [
   { icon: "users", title: "Jouw processen als startpunt", body: "Ik begin bij hoe jij werkt, niet bij een standaardpakket. De automatisering past zich aan jouw bedrijf aan, niet andersom." },
@@ -129,7 +130,7 @@ function Explorer() {
                   <span key={f}>{f}{i < item.flow.length - 1 && <i aria-hidden="true">  →</i>}</span>
                 ))}
               </div>
-              <a href="/contact/" className="btn btn--small">Bespreek dit voor jouw bedrijf <Icon name="arrow" size={16} /></a>
+              <a href={url("/contact/")} className="btn btn--small">Bespreek dit voor jouw bedrijf <Icon name="arrow" size={16} /></a>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -206,7 +207,7 @@ function Cta() {
           <h2>Staat jouw idee er niet tussen?</h2>
           <p className="sub">Juist dan. Vertel me hoe jouw werkweek eruitziet, dan bedenken we samen wat er te automatiseren valt.</p>
         </div>
-        <a href="/contact/" className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
+        <a href={url("/contact/")} className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

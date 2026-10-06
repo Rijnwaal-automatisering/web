@@ -16,7 +16,16 @@ export const ROUTES = {
   "/voorwaarden/": "voorwaarden",
 };
 
-const normalize = (path) => (path.endsWith("/") ? path : `${path}/`);
+// The site can live in a subfolder (e.g. GitHub Pages at /web/). Route paths stay root-relative
+// ("/contact/"); url() adds the base for hrefs, and the base is stripped from location.pathname.
+const BASE = import.meta.env.BASE_URL;
+export const url = (path) => BASE + path.replace(/^\//, "");
+const stripBase = (path) => (path.startsWith(BASE) ? `/${path.slice(BASE.length)}` : path);
+
+const normalize = (path) => {
+  const p = stripBase(path);
+  return p.endsWith("/") ? p : `${p}/`;
+};
 export const routeOf = (path) => ROUTES[normalize(path)] ?? null;
 
 const RouterContext = createContext({ path: "/", hash: "" });
@@ -30,19 +39,19 @@ export function Router({ children }) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = e.target.closest("a[href]");
       if (!a || a.target || a.hasAttribute("download")) return;
-      const url = new URL(a.href);
-      if (url.origin !== location.origin || !routeOf(url.pathname)) return;
-      const path = normalize(url.pathname);
+      const target = new URL(a.href);
+      if (target.origin !== location.origin || !routeOf(target.pathname)) return;
+      const path = normalize(target.pathname);
       // Same page: let the browser handle in-page anchors (smooth scroll via CSS).
       if (path === normalize(location.pathname)) {
-        if (url.hash) return;
+        if (target.hash) return;
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
       e.preventDefault();
-      history.pushState(null, "", path + url.hash);
-      setLoc({ path, hash: url.hash });
+      history.pushState(null, "", url(path) + target.hash);
+      setLoc({ path, hash: target.hash });
     };
     const onPop = () => setLoc({ path: normalize(location.pathname), hash: location.hash });
     document.addEventListener("click", onClick);

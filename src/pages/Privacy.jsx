@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import Icon from "../components/Icon.jsx";
 import { ease, reveal, stagger, inView, SectionHead } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 const PRIVACY = [
   { icon: "eu", title: "Alleen in de EU", body: "Hosting, opslag en back-ups staan uitsluitend in datacenters binnen de Europese Unie. Je data verlaat de EU niet." },
@@ -89,7 +90,7 @@ function Cta() {
           <h2>Wil je precies weten wat er met jouw data gebeurt?</h2>
           <p className="sub">In de kennismaking lopen we het samen door, voor jouw situatie.</p>
         </div>
-        <a href="/contact/" className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
+        <a href={url("/contact/")} className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

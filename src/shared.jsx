@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Icon from "./components/Icon.jsx";
-import { useRoute, routeOf } from "./router.jsx";
+import { useRoute, routeOf, url } from "./router.jsx";
 import { openCookieSettings } from "./components/CookieConsent.jsx";
 
 export const BRAND = "Waalsprong Automatisering";
@@ -27,12 +27,12 @@ export const euro = new Intl.NumberFormat("nl-NL", { style: "currency", currency
 
 // Links with a hash point into the homepage; the others are pages of their own.
 const LINKS = [
-  { href: "/toepassingen/", label: "Toepassingen" },
-  { href: "/werkwijze/", label: "Werkwijze" },
-  { href: "/privacy/", label: "Privacy" },
-  { href: "/over-mij/", label: "Over mij" },
-  { href: "/prijzen/", label: "Prijzen" },
-  { href: "/contact/", label: "Contact" },
+  { href: url("/toepassingen/"), label: "Toepassingen" },
+  { href: url("/werkwijze/"), label: "Werkwijze" },
+  { href: url("/privacy/"), label: "Privacy" },
+  { href: url("/over-mij/"), label: "Over mij" },
+  { href: url("/prijzen/"), label: "Prijzen" },
+  { href: url("/contact/"), label: "Contact" },
 ];
 const isCurrent = (href, path) => !href.includes("#") && routeOf(href) === routeOf(path);
 
@@ -58,7 +58,7 @@ export function LogoMark({ size = 30 }) {
 
 export function Logo() {
   return (
-    <a href="/" className="logo" aria-label={`${BRAND}, naar de homepage`}>
+    <a href={url("/")} className="logo" aria-label={`${BRAND}, naar de homepage`}>
       <LogoMark />
       <span>Waalsprong <em>Automatisering</em></span>
     </a>
@@ -95,7 +95,7 @@ export function Nav() {
         ))}
       </nav>
       <div className="nav-actions">
-        <a href="/contact/" className="btn btn--small">Plan een gesprek</a>
+        <a href={url("/contact/")} className="btn btn--small">Plan een gesprek</a>
         <button type="button" className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu"
           aria-label={open ? "Menu sluiten" : "Menu openen"} onClick={() => setOpen((o) => !o)}>
           <Icon name={open ? "close" : "menu"} size={20} />
@@ -144,8 +144,8 @@ export function Footer() {
         <p>KvK {KVK}</p>
       </div>
       <nav className="footer-links" aria-label="Juridisch">
-        <a href="/voorwaarden/">Concept-overeenkomst</a>
-        <a href="/privacyverklaring/">Privacyverklaring</a>
+        <a href={url("/voorwaarden/")}>Concept-overeenkomst</a>
+        <a href={url("/privacyverklaring/")}>Privacyverklaring</a>
         <button type="button" onClick={openCookieSettings}>Cookie-instellingen</button>
         <a href="#top">Terug naar boven ↑</a>
       </nav>

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import Icon from "../components/Icon.jsx";
 import { ease, reveal, stagger, inView, euro, SectionHead } from "../shared.jsx";
+import { url } from "../router.jsx";
 
 // Bedragen zijn inclusief btw.
 const N8N_PRICING = "https://n8n.io/pricing/";
@@ -85,7 +86,7 @@ function Plans() {
             <ul className="ticks">
               {p.features.map((f) => <li key={f}><Icon name="check" size={16} />{f}</li>)}
             </ul>
-            <a href="/contact/" className={`btn ${p.featured ? "" : "btn--ghost"}`}>Plan een kennismaking</a>
+            <a href={url("/contact/")} className={`btn ${p.featured ? "" : "btn--ghost"}`}>Plan een kennismaking</a>
           </motion.li>
         ))}
       </motion.ul>
@@ -194,7 +195,7 @@ function Cta() {
           <h2>Benieuwd wat het voor jouw bedrijf kost?</h2>
           <p className="sub">In 30 minuten kijken we samen naar je werkweek en welk pakket bij je past, zonder verplichtingen.</p>
         </div>
-        <a href="/contact/" className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
+        <a href={url("/contact/")} className="btn">Plan een kennismaking <Icon name="arrow" size={18} /></a>
       </motion.div>
     </section>
   );

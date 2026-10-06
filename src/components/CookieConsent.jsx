@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Icon from "./Icon.jsx";
+import { url } from "../router.jsx";
 
 // Stores the visitor's cookie choice in localStorage. The site itself only uses this functional
 // preference; check hasAnalyticsConsent() before adding analytics or other non-essential cookies.
@@ -46,7 +47,7 @@ export default function CookieConsent() {
           <p id="cookie-body">
             Deze site gebruikt alleen functionele cookies die nodig zijn om goed te werken. Met jouw toestemming
             gebruik ik ook analytische cookies om de site te verbeteren. Je keuze kun je altijd aanpassen.{" "}
-            <a href="/privacyverklaring/">Lees de privacyverklaring</a>.
+            <a href={url("/privacyverklaring/")}>Lees de privacyverklaring</a>.
           </p>
           <div className="cookie-actions">
             <button ref={firstButton} type="button" className="btn btn--small" onClick={() => choose("accepted")}>Cookies accepteren</button>
