@@ -1,6 +1,7 @@
 // Minimal stroke icons (Lucide-style), inline so there is no icon font to load.
 const PATHS = {
   spark: <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z" />,
+  bot: <><rect x="4" y="8" width="16" height="12" rx="4" /><path d="M12 4v4M9.5 13.5v1M14.5 13.5v1M2 13v3M22 13v3" /><circle cx="12" cy="3.5" r="1" /></>,
   chat: <path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z" />,
   form: <><rect x="4" y="3" width="16" height="18" rx="2.5" /><path d="M8 8h8M8 12h8M8 16h5" /></>,
   plug: <path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 01-12 0V8zM12 17v4" />,

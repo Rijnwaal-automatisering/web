@@ -15,6 +15,9 @@ npm run build
 - `src/components/FlowScene.jsx` – the 3D node graph behind the hero
 - `src/components/AvatarScene.jsx` – 3D placeholder for the "Over mij" photo; swap it for an `<img>` once the photo exists
 - `RiverSplit` in `src/pages/Home.jsx` – illustrated placeholder for the Waalsprong photo; swap it for an `<img>` once you have a photo you may use
+- `src/site.config.js` – site switches: `FLOATING_BUTTON` picks the bottom-right button (`"chatbot"`, `"whatsapp"` or `"none"`), and `CHATBOT` sets the button text, greeting and an optional n8n Chat Trigger webhook URL
+- `src/components/ChatBot.jsx` – chat button and window; without a webhook it answers from `src/components/chatbotAnswers.js`. The conversation stays open across page switches and reloads (sessionStorage)
+- `src/components/WhatsAppButton.jsx` – WhatsApp button, shown when `FLOATING_BUTTON` is `"whatsapp"`
 - `src/components/CookieConsent.jsx` – cookie pop-up; the choice is stored in localStorage, use `hasAnalyticsConsent()` before loading analytics
 - `src/styles.css` – design tokens and layout
 

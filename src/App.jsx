@@ -14,6 +14,8 @@ import Contact from "./pages/Contact.jsx";
 import Agreement from "./pages/Agreement.jsx";
 import CookieConsent from "./components/CookieConsent.jsx";
 import WhatsAppButton from "./components/WhatsAppButton.jsx";
+import ChatBot from "./components/ChatBot.jsx";
+import { FLOATING_BUTTON } from "./site.config.js";
 
 const PAGES = {
   home: { Component: Home, title: `${BRAND} — Automatisering voor het MKB` },
@@ -57,7 +59,8 @@ function Shell() {
         </motion.main>
       </AnimatePresence>
       <Footer />
-      <WhatsAppButton />
+      {FLOATING_BUTTON === "whatsapp" && <WhatsAppButton />}
+      {FLOATING_BUTTON === "chatbot" && <ChatBot />}
       <CookieConsent />
     </>
   );

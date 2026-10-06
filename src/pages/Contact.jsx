@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import Icon from "../components/Icon.jsx";
-import { ease, CONTACT_EMAIL, WHATSAPP_URL } from "../shared.jsx";
+import { ease, CONTACT_EMAIL } from "../shared.jsx";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -28,9 +28,6 @@ export default function Contact() {
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </span>
           </div>
-          <a className="btn btn--whatsapp" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-            <Icon name="whatsapp" size={20} /> Stuur een WhatsApp-bericht
-          </a>
         </div>
         {sent ? (
           <motion.div className="form-done" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} role="status">

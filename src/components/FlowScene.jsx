@@ -27,6 +27,12 @@ const EDGES = [
 
 const CARD_W = 3;
 const CARD_H = 1.5;
+// Width of the whole graph in world units at scale 1, and the page container width (--max) plus
+// a little bleed. On large screens the graph is sized to the container instead of the viewport,
+// so it stays next to the hero copy and the card textures are never blown up beyond their resolution.
+const GRAPH_W = 13.3;
+const CONTAINER_PX = 1240;
+const CAMERA_Z = 13.5;
 
 function roundRect(ctx, x, y, w, h, r) {
   ctx.beginPath();
@@ -313,16 +319,19 @@ export default function FlowScene() {
       pointer.sy += (pointer.y - pointer.sy) * 0.05;
 
       // graph sits right of the hero copy on wide screens, centred and dimmer on phones
-      const visW = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect;
-      const sc = wide ? Math.min(1.1, 0.45 * camera.aspect) : 0.5;
-      const targetX = wide ? visW * 0.225 + 0.74 * sc : 0;
+      const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      const visW = 2 * camera.position.z * tanHalf * camera.aspect;
+      const pxPerUnit = mount.clientHeight / (2 * CAMERA_Z * tanHalf);
+      const containerPx = Math.min(mount.clientWidth, CONTAINER_PX);
+      const sc = wide ? Math.min(1.1, 0.45 * camera.aspect, (containerPx * 0.56) / (GRAPH_W * pxPerUnit)) : 0.5;
+      const targetX = wide ? Math.min(visW * 0.225 + 0.74 * sc, (containerPx * 0.26) / pxPerUnit) : 0;
       world.scale.setScalar(sc);
       world.position.x = targetX - scrollSmooth * 5;
       world.position.y = scrollSmooth * 3.2 + (wide ? 0 : -3.9);
       world.rotation.y = -0.38 + scrollSmooth * 1.15 + pointer.sx * 0.12;
       world.rotation.x = 0.05 + pointer.sy * 0.06 - scrollSmooth * 0.2;
 
-      camera.position.set(0, 0.4, 13.5 - scrollSmooth * 4);
+      camera.position.set(0, 0.4, CAMERA_Z - scrollSmooth * 4);
       camera.lookAt(0, 0.2, 0);
 
       nodeMeshes.forEach((m) => {
