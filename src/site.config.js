@@ -4,9 +4,9 @@
 export const FLOATING_BUTTON = "chatbot";
 
 export const CHATBOT = {
-  buttonLabel: "Chat with our bot",
-  title: "Waalsprong-assistent",
-  greeting: "Hoi! Ik ben de assistent van Waalsprong Automatisering. Vraag me iets over prijzen, de werkwijze, privacy of wat je kunt automatiseren.",
+  buttonLabel: "Chat met onze bot",
+  title: "Rijnwaal-assistent",
+  greeting: "Hoi! Ik ben de assistent van Rijnwaal Automatisering. Vraag me iets over prijzen, de werkwijze, privacy of wat je kunt automatiseren.",
   // URL of an n8n "Chat Trigger" webhook (or any endpoint that accepts { action, sessionId, chatInput }
   // and answers with { output }). Leave empty to use the built-in answers in src/components/chatbotAnswers.js.
   webhookUrl: "",

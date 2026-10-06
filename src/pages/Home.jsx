@@ -240,7 +240,7 @@ function Waalsprong() {
           <figcaption>De Waal en de Spiegelwaal bij Nijmegen · foto volgt</figcaption>
         </motion.figure>
         <motion.div className="story-copy" initial="hidden" whileInView="show" viewport={inView} variants={stagger(0.1)}>
-          <motion.p className="eyebrow" variants={reveal}><span className="dot" /> Waarom Waalsprong?</motion.p>
+          <motion.p className="eyebrow" variants={reveal}><span className="dot" /> Waarom een rivier?</motion.p>
           <motion.h2 variants={reveal}>Een rivier die zich splitst. Net als een goede workflow.</motion.h2>
           <motion.p className="sub" variants={reveal}>
             In Nijmegen heeft de Waal sinds het project Ruimte voor de Rivier een tweede bedding: de Spiegelwaal.
@@ -263,7 +263,7 @@ function Waalsprong() {
               <span className="bnode"><Icon name="mail" size={16} /> Nieuwe klant: welkomstmail en CRM</span>
             </span>
           </motion.div>
-          <motion.p className="story-punch" variants={reveal}>Vandaar de naam: Waalsprong Automatisering.</motion.p>
+          <motion.p className="story-punch" variants={reveal}>Daarom staat de rivier in de naam: Rijnwaal Automatisering.</motion.p>
         </motion.div>
       </div>
     </section>

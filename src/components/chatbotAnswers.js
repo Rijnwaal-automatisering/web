@@ -7,7 +7,7 @@ const ANSWERS = [
   },
   {
     keywords: ["contact", "bellen", "afspraak", "kennismaking", "gesprek", "mail", "email", "e-mail", "plan"],
-    answer: "Plan een gratis kennismaking van 30 minuten via de [contactpagina](/contact/), of mail naar info@waalsprongautomatisering.nl.",
+    answer: "Plan een gratis kennismaking van 30 minuten via de [contactpagina](/contact/), of mail naar info@rijnwaalautomatisering.nl.",
   },
   {
     keywords: ["privacy", "avg", "gdpr", "hosting", "data", "gegevens", "veilig", "beveiliging", "eu"],

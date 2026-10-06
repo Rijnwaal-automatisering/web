@@ -4,9 +4,9 @@ import Icon from "./components/Icon.jsx";
 import { useRoute, routeOf, url } from "./router.jsx";
 import { openCookieSettings } from "./components/CookieConsent.jsx";
 
-export const BRAND = "Waalsprong Automatisering";
+export const BRAND = "Rijnwaal Automatisering";
 export const KVK = "12345678"; // voorbeeldnummer
-export const CONTACT_EMAIL = "info@waalsprongautomatisering.nl";
+export const CONTACT_EMAIL = "info@rijnwaalautomatisering.nl";
 export const WHATSAPP_NUMBER = "31612345678"; // 06 12345678 in internationaal formaat, zonder + of 0
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hoi Niels, ik heb een vraag over automatisering.")}`;
 export const LINKEDIN_URL = "https://www.linkedin.com/in/voorbeeld-profiel"; // fictief: vervang door je echte profiel
@@ -60,7 +60,7 @@ export function Logo() {
   return (
     <a href={url("/")} className="logo" aria-label={`${BRAND}, naar de homepage`}>
       <LogoMark />
-      <span>Waalsprong <em>Automatisering</em></span>
+      <span>Rijnwaal <em>Automatisering</em></span>
     </a>
   );
 }

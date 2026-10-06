@@ -27,12 +27,13 @@ const EDGES = [
 
 const CARD_W = 3;
 const CARD_H = 1.5;
-// Width of the whole graph in world units at scale 1, and the page container width (--max) plus
-// a little bleed. On large screens the graph is sized to the container instead of the viewport,
-// so it stays next to the hero copy and the card textures are never blown up beyond their resolution.
-const GRAPH_W = 13.3;
-const CONTAINER_PX = 1240;
+// On wide screens the graph fills the space between the hero copy and the right edge of the page
+// container (--max, plus a little bleed), so it never covers the text, never runs to the edge of a
+// large monitor, and the card textures are never blown up.
+const CONTAINER_PX = 1160;
+const BLEED_PX = 80;
 const CAMERA_Z = 13.5;
+const REST_ROTATION = { x: 0.05, y: -0.38 };
 
 function roundRect(ctx, x, y, w, h, r) {
   ctx.beginPath();
@@ -274,9 +275,8 @@ export default function FlowScene() {
         }
       });
       built = true;
-      if (reduced) frame(0);
     };
-    document.fonts.ready.then(build);
+    document.fonts.ready.then(() => { measureCopy(); build(); fitGraph(); if (reduced) frame(0); });
 
     // --- interaction state ---
     const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
@@ -298,12 +298,60 @@ export default function FlowScene() {
     onScroll();
 
     let wide = true;
+    // Hero copy position relative to the viewport centre (px), so the graph sits next to it.
+    let copyOffsetPx = 0;
+    let copyRightPx = 0;
+    const measureCopy = () => {
+      const copy = document.querySelector(".hero-copy");
+      if (!copy) return;
+      const r = copy.getBoundingClientRect();
+      copyOffsetPx = r.top + window.scrollY + r.height / 2 - mount.clientHeight / 2;
+      copyRightPx = r.right - mount.clientWidth / 2;
+    };
+    // Scale and x position that fit the graph's on-screen bounds between the hero copy and the
+    // container edge. Measured by projecting the card corners, since perspective makes the near
+    // (right) side larger than a flat estimate.
+    let fit = { sc: 0.8, x: 4.5 };
+    const corner = new THREE.Vector3();
+    const fitGraph = () => {
+      if (!built || !wide) return;
+      const w = mount.clientWidth, h = mount.clientHeight;
+      const leftPx = copyRightPx + 24;
+      const rightPx = Math.min(w / 2 - 16, CONTAINER_PX / 2 + BLEED_PX);
+      const pxPerUnit = h / (2 * CAMERA_Z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
+      camera.position.set(0, 0.4, CAMERA_Z);
+      camera.lookAt(0, 0.2, 0);
+      camera.updateMatrixWorld();
+      world.rotation.set(REST_ROTATION.x, REST_ROTATION.y, 0);
+      world.position.y = -copyOffsetPx / pxPerUnit;
+      let { sc, x } = fit;
+      for (let i = 0; i < 4; i++) {
+        world.scale.setScalar(sc);
+        world.position.x = x;
+        world.updateMatrixWorld(true);
+        let min = Infinity, max = -Infinity;
+        nodeMeshes.forEach(({ group }) => {
+          for (const cx of [-CARD_W / 2, CARD_W / 2]) for (const cy of [-CARD_H / 2, CARD_H / 2]) {
+            corner.set(cx, cy, 0.09);
+            group.localToWorld(corner).project(camera);
+            const px = (corner.x * w) / 2;
+            min = Math.min(min, px); max = Math.max(max, px);
+          }
+        });
+        sc = Math.min(1.1, sc * (rightPx - leftPx) / (max - min));
+        x += ((leftPx + rightPx) / 2 - (min + max) / 2) / pxPerUnit;
+      }
+      fit = { sc, x };
+    };
+
     const resize = () => {
+      measureCopy();
       const w = mount.clientWidth, h = mount.clientHeight;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       wide = camera.aspect > 1.1;
       camera.updateProjectionMatrix();
+      fitGraph();
       if (reduced && built) frame(0);
     };
     const ro = new ResizeObserver(resize);
@@ -319,17 +367,14 @@ export default function FlowScene() {
       pointer.sy += (pointer.y - pointer.sy) * 0.05;
 
       // graph sits right of the hero copy on wide screens, centred and dimmer on phones
-      const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      const visW = 2 * camera.position.z * tanHalf * camera.aspect;
-      const pxPerUnit = mount.clientHeight / (2 * CAMERA_Z * tanHalf);
-      const containerPx = Math.min(mount.clientWidth, CONTAINER_PX);
-      const sc = wide ? Math.min(1.1, 0.45 * camera.aspect, (containerPx * 0.56) / (GRAPH_W * pxPerUnit)) : 0.5;
-      const targetX = wide ? Math.min(visW * 0.225 + 0.74 * sc, (containerPx * 0.26) / pxPerUnit) : 0;
+      const pxPerUnit = mount.clientHeight / (2 * CAMERA_Z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
+      const sc = wide ? fit.sc : 0.5;
+      const targetX = wide ? fit.x : 0;
       world.scale.setScalar(sc);
       world.position.x = targetX - scrollSmooth * 5;
-      world.position.y = scrollSmooth * 3.2 + (wide ? 0 : -3.9);
-      world.rotation.y = -0.38 + scrollSmooth * 1.15 + pointer.sx * 0.12;
-      world.rotation.x = 0.05 + pointer.sy * 0.06 - scrollSmooth * 0.2;
+      world.position.y = scrollSmooth * 3.2 + (wide ? -copyOffsetPx / pxPerUnit : -3.9);
+      world.rotation.y = REST_ROTATION.y + scrollSmooth * 1.15 + pointer.sx * 0.12;
+      world.rotation.x = REST_ROTATION.x + pointer.sy * 0.06 - scrollSmooth * 0.2;
 
       camera.position.set(0, 0.4, CAMERA_Z - scrollSmooth * 4);
       camera.lookAt(0, 0.2, 0);

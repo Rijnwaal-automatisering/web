@@ -1,6 +1,6 @@
-# Waalsprong Automatisering
+# Rijnwaal Automatisering
 
-Website for Waalsprong Automatisering, a one-person n8n automation business for small companies. Vite + React, three.js (3D workflow graph and avatar placeholder) and Motion (UI animation).
+Website for Rijnwaal Automatisering, a one-person n8n automation business for small companies. Vite + React, three.js (3D workflow graph and avatar placeholder) and Motion (UI animation).
 
 ```bash
 npm install
