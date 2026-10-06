@@ -349,7 +349,7 @@ export default function FlowScene() {
       const w = mount.clientWidth, h = mount.clientHeight;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
-      wide = camera.aspect > 1.1;
+      wide = w >= 600; // matches the side-by-side hero layout in styles.css
       camera.updateProjectionMatrix();
       fitGraph();
       if (reduced && built) frame(0);

@@ -227,9 +227,16 @@ main { position: relative; }
 @media (max-width: 720px) {
   body { font-size: 16px; }
   .nav-links { display: none; }
-  .hero { align-items: flex-start; padding-top: 128px; }
-  .hero-copy { padding-bottom: 34vh; } /* leave room for the graph below the copy on phones */
   .quotes, .usecases, .guards { grid-template-columns: 1fr; }
+}
+
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -268,6 +275,15 @@ main { position: relative; }
 @media (max-width: 720px) {
   .pillars, .usecases { grid-template-columns: 1fr; }
 }
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
+}
+
 @media (prefers-reduced-motion: reduce) { .shield-ring { animation: none; opacity: 0.4; } }
 
 /* ---------- nav actions + mobile menu ---------- */
@@ -531,9 +547,18 @@ main { position: relative; }
   background: var(--accent); border-radius: 2px; animation: caret 1s steps(1) infinite;
 }
 @keyframes caret { 50% { opacity: 0; } }
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
+}
+
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 
-/* ---------- waalsprong story ---------- */
+/* ---------- river story ---------- */
 .story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
 .story-visual { position: relative; margin: 0; border-radius: 32px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #e3f0dc; }
 .river { display: block; width: 100%; height: auto; }
@@ -611,6 +636,15 @@ main { position: relative; }
 .eu-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #003399 30%, rgba(0, 51, 153, 0.75) 55%, transparent 80%); }
 .eu-stars-ring { transform-origin: 0 0; animation: eu-spin 120s linear infinite; }
 @keyframes eu-spin { to { rotate: 360deg; } }
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
+}
+
 @media (prefers-reduced-motion: reduce) { .eu-stars-ring { animation: none; } }
 .eu-hero-copy { position: relative; z-index: 1; max-width: 560px; display: grid; gap: 16px; }
 .eu-hero h1 { color: #fff; font-size: clamp(34px, 4.6vw, 56px); letter-spacing: -0.035em; margin: 0; }
@@ -750,6 +784,15 @@ main { position: relative; }
   .chat-fab-label { display: none; }
   .chat { right: 8px; left: 8px; width: auto; bottom: 80px; height: min(560px, calc(100svh - 96px)); }
 }
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
+}
+
 @media (prefers-reduced-motion: reduce) { .chat-typing span { animation: none; opacity: 0.7; } }
 
 /* ---------- about: employers + LinkedIn ---------- */
@@ -782,6 +825,15 @@ main { position: relative; }
 }
 .marquee-track li::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: var(--accent); vertical-align: middle; opacity: 0.7; }
 @keyframes marquee { to { transform: translateX(-50%); } }
+/* Hero: copy and graph side by side from 600px (tablets, phones in landscape), stacked below that. */
+@media (max-width: 1099px) {
+  .hero-copy { max-width: 56%; }
+}
+@media (max-width: 599px) {
+  .hero { padding-top: 128px; }
+  .hero-copy { max-width: none; padding-bottom: 34vh; } /* leave room for the graph below the copy */
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-row { animation: none; flex-wrap: wrap; width: auto; }
   .marquee-track[aria-hidden="true"] { display: none; }

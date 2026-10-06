@@ -178,17 +178,17 @@ function Hero() {
   );
 }
 
-// Illustrated top view of the Waal splitting around Veur-Lent. Placeholder until the photo is in.
+// Illustrated top view of the Rhine splitting into the Waal and the Pannerdensch Kanaal at the
+// Pannerdensche Kop. Placeholder until the photo is in.
 const RIVER_IN = "M-20 236 C60 236 120 233 175 233";
-const RIVER_WAAL = "C260 237 330 288 420 280 C480 275 512 252 545 241";
-const RIVER_SPIEGEL = "C240 214 292 150 382 150 C452 150 502 208 545 238";
-const RIVER_OUT = "C575 241 600 241 640 241";
+const RIVER_WAAL = "C260 237 330 296 420 300 C500 304 560 306 640 306";
+const RIVER_KANAAL = "C240 214 300 142 390 134 C480 126 560 122 640 122";
 
 function RiverSplit() {
   const reduce = useReducedMotion();
-  const routes = [`${RIVER_IN} ${RIVER_WAAL} ${RIVER_OUT}`, `${RIVER_IN} ${RIVER_SPIEGEL} ${RIVER_OUT}`];
+  const routes = [`${RIVER_IN} ${RIVER_WAAL}`, `${RIVER_IN} ${RIVER_KANAAL}`];
   return (
-    <svg className="river" viewBox="0 0 600 420" role="img" aria-label="Kaartje: de Waal splitst zich bij Nijmegen in de Waal en de Spiegelwaal, met het eiland Veur-Lent ertussen.">
+    <svg className="river" viewBox="0 0 600 420" role="img" aria-label="Kaartje: de Rijn splitst zich bij de Pannerdensche Kop in de Waal en het Pannerdensch Kanaal.">
       <defs>
         <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
           <stop stopColor="#e3f0dc" /><stop offset="1" stopColor="#d6e8cf" />
@@ -197,20 +197,18 @@ function RiverSplit() {
       <rect width="600" height="420" fill="url(#land)" />
       <g fill="#cfe3c5" opacity="0.8">
         <rect x="30" y="40" width="120" height="80" rx="10" />
-        <rect x="430" y="40" width="140" height="70" rx="10" />
+        <rect x="430" y="24" width="140" height="64" rx="10" />
         <rect x="60" y="320" width="150" height="70" rx="10" />
-        <rect x="400" y="330" width="170" height="60" rx="10" />
+        <rect x="400" y="352" width="170" height="48" rx="10" />
       </g>
       <g fill="none" strokeLinecap="round">
         <path d={RIVER_IN} stroke="#7dbbe6" strokeWidth="56" />
         <path d={`M175 233 ${RIVER_WAAL}`} stroke="#7dbbe6" strokeWidth="48" />
-        <path d={`M175 233 ${RIVER_SPIEGEL}`} stroke="#7dbbe6" strokeWidth="30" />
-        <path d={`M545 240 ${RIVER_OUT}`} stroke="#7dbbe6" strokeWidth="56" />
+        <path d={`M175 233 ${RIVER_KANAAL}`} stroke="#7dbbe6" strokeWidth="30" />
         <g stroke="#a9d6f5" strokeWidth="3" strokeDasharray="18 22" opacity="0.9">
           <path d={routes[0]} /><path d={routes[1]} />
         </g>
       </g>
-      <path d="M470 110v220" stroke="#64748b" strokeWidth="7" strokeLinecap="round" />
       {!reduce && routes.map((d, r) =>
         [0, 1, 2].map((k) => (
           <circle key={`${r}-${k}`} r="4.5" fill="#fff" opacity="0.95">
@@ -219,34 +217,32 @@ function RiverSplit() {
         )),
       )}
       <g fill="#1e3a5f" fontFamily="Space Grotesk, system-ui, sans-serif" fontWeight="600">
-        <text x="300" y="320" fontSize="17">Waal</text>
-        <text x="300" y="128" fontSize="17">Spiegelwaal</text>
-        <text x="330" y="222" fontSize="13" opacity="0.75">Veur-Lent</text>
-        <text x="40" y="170" fontSize="15" opacity="0.8">Lent</text>
-        <text x="40" y="300" fontSize="15" opacity="0.8">Nijmegen</text>
+        <text x="40" y="196" fontSize="17">Rijn</text>
+        <text x="500" y="272" fontSize="17">Waal</text>
+        <text x="380" y="176" fontSize="15">Pannerdensch Kanaal</text>
+        <text x="100" y="292" fontSize="13" opacity="0.75">Pannerdensche Kop</text>
       </g>
     </svg>
   );
 }
 
-function Waalsprong() {
+function RiverStory() {
   return (
-    <section id="waalsprong" className="section">
+    <section id="rijnwaal" className="section">
       <div className="story">
         <motion.figure className="story-visual" initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={inView} transition={{ duration: 0.8, ease }}>
-          {/* Vervang <RiverSplit /> door <img src={url("/waalsprong.jpg")} alt="..."> zodra de foto er is. */}
+          {/* Vervang <RiverSplit /> door <img src={url("/rijnwaal.jpg")} alt="..."> zodra de foto er is. */}
           <RiverSplit />
-          <figcaption>De Waal en de Spiegelwaal bij Nijmegen · foto volgt</figcaption>
+          <figcaption>De Rijn splitst zich bij de Pannerdensche Kop · foto volgt</figcaption>
         </motion.figure>
         <motion.div className="story-copy" initial="hidden" whileInView="show" viewport={inView} variants={stagger(0.1)}>
-          <motion.p className="eyebrow" variants={reveal}><span className="dot" /> Waarom een rivier?</motion.p>
+          <motion.p className="eyebrow" variants={reveal}><span className="dot" /> Waarom Rijnwaal?</motion.p>
           <motion.h2 variants={reveal}>Een rivier die zich splitst. Net als een goede workflow.</motion.h2>
           <motion.p className="sub" variants={reveal}>
-            In Nijmegen heeft de Waal sinds het project Ruimte voor de Rivier een tweede bedding: de Spiegelwaal.
-            Bij Lent splitst de rivier zich in twee stromen, met het eiland Veur-Lent ertussen. Zo heeft het water
-            bij hoogwater meer ruimte en stroomt alles veilig verder. De stad maakte hier zelf ook een sprong over
-            de rivier: de nieuwe wijk aan de overkant heet de Waalsprong.
+            Vlak nadat de Rijn Nederland binnenstroomt, splitst hij zich bij de Pannerdensche Kop in twee stromen.
+            Ongeveer twee derde van het water gaat de Waal in, langs Nijmegen richting zee. De rest stroomt via
+            het Pannerdensch Kanaal richting Arnhem. Elke stroom krijgt zo zijn eigen route.
           </motion.p>
           <motion.p className="sub" variants={reveal}>
             Precies zo werken de flows die ik bouw. Er komt iets binnen en de workflow kiest zelf de juiste route.
@@ -263,7 +259,7 @@ function Waalsprong() {
               <span className="bnode"><Icon name="mail" size={16} /> Nieuwe klant: welkomstmail en CRM</span>
             </span>
           </motion.div>
-          <motion.p className="story-punch" variants={reveal}>Daarom staat de rivier in de naam: Rijnwaal Automatisering.</motion.p>
+          <motion.p className="story-punch" variants={reveal}>Rijn en Waal: vandaar de naam Rijnwaal Automatisering.</motion.p>
         </motion.div>
       </div>
     </section>
@@ -495,7 +491,7 @@ export default function Home() {
       <Hero />
       <Demo />
       <Integrations />
-      <Waalsprong />
+      <RiverStory />
       <Security />
       <AboutTeaser />
     </>
